@@ -1,0 +1,27 @@
+name: DataDash QA Automation
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  scrape-and-sum:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install Dependencies
+        run: |
+          npm install
+          npx playwright install --with-deps
+
+      - name: Run Playwright Scraper 24f1001431@ds.study.iitm.ac.in
+        run: node sum_tables.js
